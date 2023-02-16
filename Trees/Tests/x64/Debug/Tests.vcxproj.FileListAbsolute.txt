@@ -1,1 +1,2 @@
 C:\Users\ekate\Downloads\учеба\аисд\Trees\Tests\x64\Debug\Tests.vcxproj.CopyComplete
+C:\Users\ekate\Downloads\учеба\аисд\algorithms-AA-tree-Splay-tree\Trees\Tests\x64\Debug\Tests.vcxproj.CopyComplete

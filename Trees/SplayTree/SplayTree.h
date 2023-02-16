@@ -14,21 +14,20 @@ public:
         root = nullptr;
     }
 
-    Node* Insert(int value) {
+    void Insert(int value) {
         Node* node = InsertNode(value);
-        return Splay(node);
+        Splay(node);
     }
 
-    Node* Search(int value) {
+    void Search(int value) {
         Node* result = Search(root, value);
         if (result) {
             Splay(result);
         }
-        return result;
     }
 
-    Node* Delete(int value) {
-        return DeleteNode(root, value);
+    void Delete(int value) {
+        DeleteNode(root, value);
     }
 
     void Show(string s, bool last) {
@@ -39,7 +38,7 @@ public:
         return ShowString(root);
     }
     
-private:
+//private:
     
     Node* root;
 
@@ -60,7 +59,7 @@ private:
         }
     }
 
-    void WriteToArray(Node* node, vector<int>& results) { //функция для вывода дерева в строку
+    void WriteToArray(Node* node, vector<int>& results) { //функция для записи дерева в массив
         if (node != nullptr) {                   //вносит значения дерева от корня к детям в массив
             results.push_back(node->value);
             WriteToArray(node->left, results);
@@ -83,7 +82,7 @@ private:
         return s.str();
     }
 
-    Node* Splay(Node* node) { //основная операция дерева для поднятия элемента к корню
+    void Splay(Node* node) { //основная операция дерева для поднятия элемента к корню
         while (node->parent) {
             if (!node->parent->parent) {
                 if (node == node->parent->left) {
@@ -116,10 +115,9 @@ private:
                 LeftRotate(node->parent);
             }
         }
-        return node;
     }
 
-    Node* Search(Node* node, int value) { //стандартный поиск
+    Node* Search(Node* node, int value) { //поиск как в обычном дереве
         if (node == nullptr || value == node->value) {
             return node;
         }
@@ -129,7 +127,7 @@ private:
         return Search(node->right, value);
     }
 
-//        y        -->           x
+//        y        -->            x
 //      /    \   RightRotate    /   \
 //     x      c              a       y
 //   /    \     LeftRotate        /    \
@@ -138,7 +136,6 @@ private:
     Node* RightRotate(Node* node) {
         Node* current = node->left;
         node->left = current->right;
-
         if (current->right != nullptr) {
             current->right->parent = node;
         }
@@ -160,7 +157,6 @@ private:
     Node* LeftRotate(Node* node) {
         Node* current = node->right;
         node->right = current->left;
-
         if (current->left != nullptr) {
             current->left->parent = node;
         }
@@ -204,12 +200,13 @@ private:
             parent->right = node;
         }
         else {
+            delete node;
             return parent;
         }
         return node;
     }
 
-    Node* DeleteNode(Node* node, int value) { //удаление элемента состоит из трех частей
+    Node* DeleteNode(Node* node, int value) {
         Node* x = nullptr;
         while (node != nullptr) { //поиск элемента
             if (node->value == value) {

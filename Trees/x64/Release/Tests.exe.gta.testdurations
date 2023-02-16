@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GtaTestDurations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Executable>C:\Users\ekate\Downloads\учеба\аисд\Trees\x64\Release\Tests.exe</Executable>
+  <Executable>C:\Users\ekate\Downloads\учеба\аисд\algorithms-AA-tree-Splay-tree\Trees\x64\Release\Tests.exe</Executable>
   <TestDurations>
-    <TestDuration Test="AATreeLib.TestAAInsertBig" Duration="5" />
+    <TestDuration Test="AATreeLib.TestAAInsertBig" Duration="19" />
     <TestDuration Test="AATreeLib.TestAARight" Duration="1" />
     <TestDuration Test="AATreeLib.TestAALeft" Duration="1" />
     <TestDuration Test="AATreeLib.TestAASearchWithData" Duration="1" />
@@ -14,18 +14,18 @@
     <TestDuration Test="AATreeLib.TestAAProcess" Duration="1" />
     <TestDuration Test="AATreeLib.TestAAInsertBig3" Duration="1" />
     <TestDuration Test="AATreeLib.TestAAInsertBig4" Duration="1" />
-    <TestDuration Test="AATreeLib.TestAAInsertBig5" Duration="5" />
-    <TestDuration Test="AATreeLib.TestAAInsertBig6" Duration="50" />
-    <TestDuration Test="AATreeLib.TestAAInsertBig7" Duration="458" />
-    <TestDuration Test="AATreeLib.TestAAInsertDeleteBig3" Duration="45" />
-    <TestDuration Test="AATreeLib.TestAAInsertDeleteBig4" Duration="46" />
-    <TestDuration Test="AATreeLib.TestAAInsertDeleteBig5" Duration="45" />
-    <TestDuration Test="AATreeLib.TestAAInsertDeleteBig6" Duration="47" />
-    <TestDuration Test="AATreeLib.TestAAInsertRandom7" Duration="639" />
-    <TestDuration Test="AATreeLib.TestAAInsertRandom6" Duration="63" />
-    <TestDuration Test="AATreeLib.TestAAInsertRandom5" Duration="6" />
-    <TestDuration Test="AATreeLib.TestAAInsertRandom4" Duration="1" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertBig" Duration="5" />
+    <TestDuration Test="AATreeLib.TestAAInsertBig5" Duration="21" />
+    <TestDuration Test="AATreeLib.TestAAInsertBig6" Duration="246" />
+    <TestDuration Test="AATreeLib.TestAAInsertBig7" Duration="2960" />
+    <TestDuration Test="AATreeLib.TestAAInsertDeleteBig3" Duration="245" />
+    <TestDuration Test="AATreeLib.TestAAInsertDeleteBig4" Duration="248" />
+    <TestDuration Test="AATreeLib.TestAAInsertDeleteBig5" Duration="268" />
+    <TestDuration Test="AATreeLib.TestAAInsertDeleteBig6" Duration="304" />
+    <TestDuration Test="AATreeLib.TestAAInsertRandom7" Duration="2085" />
+    <TestDuration Test="AATreeLib.TestAAInsertRandom6" Duration="213" />
+    <TestDuration Test="AATreeLib.TestAAInsertRandom5" Duration="22" />
+    <TestDuration Test="AATreeLib.TestAAInsertRandom4" Duration="2" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertBig" Duration="4" />
     <TestDuration Test="SplayTreeLib.TestSplayRight" Duration="1" />
     <TestDuration Test="SplayTreeLib.TestSplayLeft" Duration="1" />
     <TestDuration Test="SplayTreeLib.TestSplaySearchWithData" Duration="1" />
@@ -37,16 +37,33 @@
     <TestDuration Test="SplayTreeLib.TestSplayProcess" Duration="1" />
     <TestDuration Test="SplayTreeLib.TestSplayInsertBig3" Duration="1" />
     <TestDuration Test="SplayTreeLib.TestSplayInsertBig4" Duration="1" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertBig5" Duration="7" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertBig6" Duration="55" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertBig7" Duration="500" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertDeleteBig3" Duration="50" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertDeleteBig4" Duration="50" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertDeleteBig5" Duration="285" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertDeleteBig6" Duration="110" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertRandom7" Duration="999" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertRandom6" Duration="98" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertRandom5" Duration="9" />
-    <TestDuration Test="SplayTreeLib.TestSplayInsertRandom4" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertBig5" Duration="8" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertBig6" Duration="49" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertBig7" Duration="499" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertDeleteBig3" Duration="140" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertDeleteBig4" Duration="152" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertDeleteBig5" Duration="152" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertDeleteBig6" Duration="190" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertRandom7" Duration="7650" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertRandom6" Duration="720" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertRandom5" Duration="49" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertRandom4" Duration="3" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertWithoutData" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertRight" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayRightRotate" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayLeftRotate" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplaySearch" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplaySearchWithoutElement" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayInsertLeft" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayZagZag" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayDelete" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayZigZig" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayZigZag" Duration="1" />
+    <TestDuration Test="SplayTreeLib.TestSplayZagZig" Duration="1" />
+    <TestDuration Test="AATreeLib.TestAAInsertWithoutData" Duration="1" />
+    <TestDuration Test="AATreeLib.TestAAInsert" Duration="1" />
+    <TestDuration Test="AATreeLib.TestAADelete" Duration="1" />
+    <TestDuration Test="AATreeLib.TestAASkew" Duration="1" />
+    <TestDuration Test="AATreeLib.TestAASplit" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

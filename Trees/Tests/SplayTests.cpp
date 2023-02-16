@@ -15,83 +15,113 @@ SplayTree* PreGeneratedSplayTree() { //заранее сделанное дерево для использовани
 	return tree;
 }
 
-TEST(SplayTreeLib, TestSplayInsertBig) {
+TEST(SplayTreeLib, TestSplayInsertWithoutData) {
 	SplayTree* tree = new SplayTree();
-	for (int i = 0; i < 100000; i++) {
-		tree->Insert(i);
-	}
+	ASSERT_TRUE(tree->ShowString() == "");
 }
 
-TEST(SplayTreeLib, TestSplayRight) {
+TEST(SplayTreeLib, TestSplayInsertLeft) {
 	SplayTree* tree = new SplayTree();
 	tree->Insert(1);
 	tree->Insert(2);
 	tree->Insert(3);
 	tree->Insert(4);
 	tree->Insert(5);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "5 4 3 2 1");
 }
 
-TEST(SplayTreeLib, TestSplayLeft) {
+TEST(SplayTreeLib, TestSplayInsertRight) {
 	SplayTree* tree = new SplayTree();
 	tree->Insert(5);
 	tree->Insert(4);
 	tree->Insert(3);
 	tree->Insert(2);
 	tree->Insert(1);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "1 2 3 4 5");
 }
 
-TEST(SplayTreeLib, TestSplaySearchWithData) {
+TEST(SplayTreeLib, TestSplayRightRotate) {
 	SplayTree* tree = PreGeneratedSplayTree();
-	tree->Show("", true);
+	tree->RightRotate(tree->root);
+	ASSERT_TRUE(tree->ShowString() == "7 3 20 42 22 39 87");
+}
+
+TEST(SplayTreeLib, TestSplayLeftRotate) {
+	SplayTree* tree = PreGeneratedSplayTree();
+	tree->LeftRotate(tree->root);
+	ASSERT_TRUE(tree->ShowString() == "42 20 7 3 22 39 87");
+}
+
+TEST(SplayTreeLib, TestSplayZagZag) {
+	SplayTree* tree = PreGeneratedSplayTree();
+	tree->Splay(tree->root->right->right);
+	ASSERT_TRUE(tree->ShowString() == "87 42 20 7 3 22 39");
+}
+
+TEST(SplayTreeLib, TestSplayZigZig) {
+	SplayTree* tree = PreGeneratedSplayTree();
+	tree->Splay(tree->root->left->left);
+	ASSERT_TRUE(tree->ShowString() == "3 7 20 42 22 39 87");
+}
+
+TEST(SplayTreeLib, TestSplayZigZag) {
+	SplayTree* tree = PreGeneratedSplayTree();
+	tree->Splay(tree->root->right->left);
+	ASSERT_TRUE(tree->ShowString() == "22 20 7 3 42 39 87");
+}
+
+TEST(SplayTreeLib, TestSplayZagZig) {
+	SplayTree* tree = PreGeneratedSplayTree();
+	tree->Insert(100);
+	tree->Splay(tree->root->left->right);
+	ASSERT_TRUE(tree->ShowString() == "87 20 7 3 42 22 39 100");
+}
+
+TEST(SplayTreeLib, TestSplaySearch) {
+	SplayTree* tree = PreGeneratedSplayTree();
 	tree->Search(7);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "7 3 20 42 22 39 87");
 }
 
 TEST(SplayTreeLib, TestSplaySearchWithoutData) {
-	SplayTree* tree = PreGeneratedSplayTree();
-	tree->Show("", true);
+	SplayTree* tree = new SplayTree();
 	tree->Search(2);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "");
 }
 
-TEST(SplayTreeLib, TestSplayDeleteWithData) {
+TEST(SplayTreeLib, TestSplayDelete) {
 	SplayTree* tree = PreGeneratedSplayTree();
-	tree->Show("", true);
 	tree->Delete(42);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "39 22 20 7 3 87");
 }
 
 TEST(SplayTreeLib, TestSplayDeleteWithoutData) {
-	SplayTree* tree = PreGeneratedSplayTree();
-	tree->Show("", true);
+	SplayTree* tree = new SplayTree();
 	tree->Delete(2);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "");
 }
 
 TEST(SplayTreeLib, TestSplayDeleteLeaf) {
 	SplayTree* tree = PreGeneratedSplayTree();
-	tree->Show("", true);
 	tree->Delete(39);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "22 20 7 3 42 87");
 }
 
 TEST(SplayTreeLib, TestSplayDeleteRoot) {
 	SplayTree* tree = PreGeneratedSplayTree();
-	tree->Show("", true);
 	tree->Delete(20);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "7 3 42 22 39 87");
 }
 
 TEST(SplayTreeLib, TestSplayProcess) {
 	SplayTree* tree = PreGeneratedSplayTree();
+	ASSERT_TRUE(tree->ShowString() == "20 7 3 42 22 39 87");
 	tree->Insert(10);
+	ASSERT_TRUE(tree->ShowString() == "10 7 3 20 42 22 39 87");
 	tree->Search(42);
+	ASSERT_TRUE(tree->ShowString() == "42 20 10 7 3 22 39 87");
 	tree->Delete(22);
-	cout << tree->ShowString();
-	tree->Show("", true);
-	//ASSERT_TRUE(ShowString(tree->GetRoot()) == "20 10 7 3 42 39 87");
+	ASSERT_TRUE(tree->ShowString() == "20 10 7 3 42 39 87");
 }
 
 //далее идут тесты для исследования

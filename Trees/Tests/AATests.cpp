@@ -5,93 +5,88 @@ using namespace std;
 
 AATree* PreGeneratedAATree() { //заранее сделанное дерево для использования в разных тестах
 	AATree* tree = new AATree();
-	AANode* last = tree->Insert(3);
-	last = tree->Insert(39);
-	last = tree->Insert(87);
-	last = tree->Insert(7);
-	last = tree->Insert(22);
-	last = tree->Insert(42);
-	last = tree->Insert(20);
+	tree->Insert(3);
+	tree->Insert(39);
+	tree->Insert(87);
+	tree->Insert(7);
+	tree->Insert(22);
+	tree->Insert(42);
+	tree->Insert(20);
 	return tree;
 }
 
-TEST(AATreeLib, TestAAInsertBig) {
+TEST(AATreeLib, TestAAInsertWithoutData) {
 	AATree* tree = new AATree();
-	for (int i = 0; i < 100000; i++) {
-		tree->Insert(i);
-	}
+	ASSERT_TRUE(tree->ShowString() == "");
 }
 
-TEST(AATreeLib, TestAARight) {
+TEST(AATreeLib, TestAAInsert) {
 	AATree* tree = new AATree();
 	tree->Insert(1);
 	tree->Insert(2);
 	tree->Insert(3);
 	tree->Insert(4);
 	tree->Insert(5);
-	cout << tree->ShowString();
+	ASSERT_TRUE(tree->ShowString() == "2 1 4 3 5");
 }
 
-TEST(AATreeLib, TestAALeft) {
+TEST(AATreeLib, TestAASearchWithoutData) {
 	AATree* tree = new AATree();
-	tree->Insert(5);
-	tree->Insert(4);
-	tree->Insert(3);
-	tree->Insert(2);
-	tree->Insert(1);
-	tree->Show("", true);
+	tree->Search(2);
+	ASSERT_TRUE(tree->ShowString() == "");
 }
 
 TEST(AATreeLib, TestAASearchWithData) {
 	AATree* tree = PreGeneratedAATree();
-	tree->Show("", true);
 	tree->Search(7);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "7 3 39 20 22 42 87");
 }
 
-TEST(AATreeLib, TestAASearchWithoutData) {
+TEST(AATreeLib, TestAADelete) {
 	AATree* tree = PreGeneratedAATree();
-	tree->Show("", true);
-	tree->Search(2);
-	tree->Show("", true);
-}
-
-TEST(AATreeLib, TestAADeleteWithData) {
-	AATree* tree = PreGeneratedAATree();
-	tree->Show("", true);
 	tree->Delete(42);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "7 3 39 20 22 87");
 }
 
 TEST(AATreeLib, TestAADeleteWithoutData) {
-	AATree* tree = PreGeneratedAATree();
-	tree->Show("", true);
+	AATree* tree = new AATree();
 	tree->Delete(2);
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "");
 }
 
 TEST(AATreeLib, TestAADeleteLeaf) {
 	AATree* tree = PreGeneratedAATree();
-	tree->Show("", true);
-	tree->Delete(39);
-	tree->Show("", true);
+	tree->Delete(87);
+	ASSERT_TRUE(tree->ShowString() == "7 3 39 20 22 42");
 }
 
-TEST(AATreeLib, TestAADeleteRoot) {
+TEST(AATreeLib, TestAASkew) {
 	AATree* tree = PreGeneratedAATree();
-	tree->Show("", true);
-	tree->Delete(20);
-	tree->Show("", true);
+	tree->root->left->level = 4;
+	tree->Skew(tree->root);
+	ASSERT_TRUE(tree->ShowString() == "7 3 39 20 22 42 87");
+	ASSERT_TRUE(tree->root->left->level = 3);
+}
+
+TEST(AATreeLib, TestAASplit) {
+	AATree* tree = PreGeneratedAATree();
+	tree->root->right->level = 4;
+	tree->root->right->right->level = 4;
+	tree->Split(tree->root);
+	ASSERT_TRUE(tree->ShowString() == "7 3 39 20 22 42 87");
+	ASSERT_TRUE(tree->root->right->level = 3);
+	ASSERT_TRUE(tree->root->right->right->level = 2);
 }
 
 TEST(AATreeLib, TestAAProcess) {
 	AATree* tree = PreGeneratedAATree();
-	cout << tree->ShowString();
+	ASSERT_TRUE(tree->ShowString() == "7 3 39 20 22 42 87");
 	tree->Insert(10);
+	ASSERT_TRUE(tree->ShowString() == "20 7 3 10 39 22 42 87");
 	tree->Search(42);
+	ASSERT_TRUE(tree->ShowString() == "20 7 3 10 39 22 42 87");
 	tree->Delete(22);
-	cout << tree->ShowString();
-	tree->Show("", true);
+	ASSERT_TRUE(tree->ShowString() == "20 7 3 10 42 39 87");
 }
 
 //далее идут тесты для исследования

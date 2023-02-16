@@ -19,23 +19,23 @@ public:
         return root;
     }
 
-    AANode* Search(int value) {
-        return Search(root, value);
+    void Search(int value) {
+        Search(root, value);
     }
 
-    AANode* Delete(int value) {
-        return Delete(root, value);
+    void Delete(int value) {
+        Delete(root, value);
     }
 
     void Show(string s, bool last) {
         Show(root, s, last);
     }
 
-    string ShowString() { //функция для вывода cout, выводит дерево в строку
+    string ShowString() {
         return ShowString(root);
     }
 
-private:
+//private:
     AANode* root;
 
     void Show(AANode* node, string s, bool last) { //функция, выводящая дерево в виде дерева
@@ -55,8 +55,8 @@ private:
         }
     }
 
-    void WriteToArray(AANode* node, vector<int>& results) { //функция для вывода дерева в строку
-        if (node != nullptr) {                     //вносит значения дерева от корня к детям в массив
+    void WriteToArray(AANode* node, vector<int>& results) { //функция для записи дерева в массив
+        if (node != nullptr) {                     //вносит значения дерева от корня к детям
             results.push_back(node->value);
             WriteToArray(node->left, results);
             WriteToArray(node->right, results);
@@ -78,9 +78,9 @@ private:
         return ss.str();
     }
 
-    AANode* Search(AANode* node, int value) {
+    void Search(AANode* node, int value) {
         if (node == nullptr || value == node->value) {
-            return node;
+            return;
         }
         if (value < node->value) {
             return Search(node->left, value);
@@ -116,11 +116,8 @@ private:
             node->left = k->right;
             k->right = node;
             node = k;
-            return node;
         }
-        else {
-            return node;
-        }
+        return node;
     }
 
     AANode* Split(AANode* node) { //функция, которая ищет и убирает два последовательных горизонтальных правых ребра
@@ -136,11 +133,8 @@ private:
             k->left = node;
             node = k;
             node->level = node->level + 1;
-            return node;
         }
-        else {
-            return node;
-        }
+        return node;
     }
 
     AANode* Delete(AANode* node, int value) { //удаление элемента
@@ -156,22 +150,21 @@ private:
         else { //элемент найден
             if (node->left == nullptr && node->right == nullptr) {
                 delete(node);
-                node = nullptr;
                 return nullptr;
             }
-            AANode* l;
+            AANode* element;
             if (node->left == nullptr) {
-                l = Successor(node);
-                node->value = l->value;
-                node->right = Delete(node->right, l->value);
+                element = Successor(node);
+                node->value = element->value;
+                node->right = Delete(node->right, element->value);
             }
             else {
-                l = Predecessor(node);
-                node->value = l->value;
-                node->left = Delete(node->left, l->value);
+                element = Predecessor(node);
+                node->value = element->value;
+                node->left = Delete(node->left, element->value);
             }
         } //балансировка и обновление параметра level
-        node = Change_level(node);
+        node = ChangeLevel(node);
         node = Skew(node);
         node->right = Skew(node->right);
         if (node->right != nullptr && node->right->right != nullptr) {
@@ -198,7 +191,7 @@ private:
         return node;
     }
 
-    AANode* Change_level(AANode*& node) {  //функция, которая обновляет параметр level в узле
+    AANode* ChangeLevel(AANode* node) {  //функция, которая обновляет параметр level в узле
         if (!node) {
             return nullptr;
         }
@@ -216,20 +209,13 @@ private:
         else {
             right = node->right->level;
         }
-        int ShouldBe = Min(left, right) + 1;
-        if (ShouldBe < node->level) {
-            node->level = ShouldBe;
-            if (node->right && ShouldBe < node->right->level) {
-                node->right->level = ShouldBe;
+        int should = min(left, right) + 1;
+        if (should < node->level) {
+            node->level = should;
+            if (node->right && should < node->right->level) {
+                node->right->level = should;
             }
         }
         return node;
-    }
-
-    int Min(int left, int right) {
-        if (left <= right) {
-            return left;
-        }
-        return right;
     }
 };
